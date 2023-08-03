@@ -1,0 +1,11 @@
+version: '3'
+services:
+  azure-shell:
+    build: .
+    volumes:
+      - .:/src
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /src
+    privileged: true
+    env_file:
+      - .env
