@@ -10,7 +10,6 @@ locals {
       [
         for key, role in local.aad_groups_definitions : {
           display_name            = role.display_name
-          role_id                 = role.role_id
           custom_role_assignments = role.custom_role_assignments
           assignment_key          = key
         }
@@ -23,12 +22,11 @@ locals {
     distinct(flatten([
       for each_mapping in local.role_assignments : [
         for id in each_mapping.custom_role_assignments : {
-          custom_role_definition_id = id
-          principal_id              = each_mapping.role_id
-          group_key                 = each_mapping.display_name
+          custom_role_definition_name = id
+          group_key                   = each_mapping.display_name
         }
       ]
-    ])) : role_assignments.custom_role_definition_id => role_assignments
+    ])) : role_assignments.custom_role_definition_name => role_assignments
   }
 
 }

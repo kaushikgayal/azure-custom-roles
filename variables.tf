@@ -53,13 +53,11 @@ variable "aad_groups" {
   description = "AAD groups mapping to be used for custom role assignments"
   type = object({
     display_name            = string
-    role_id                 = string
     custom_role_assignments = list(string)
   })
 
   default = {
     display_name            = ""
-    role_id                 = ""
     custom_role_assignments = []
   }
 }
@@ -69,6 +67,11 @@ variable "scope_subscription" {
 }
 
 variable "aad_group_list" {
+  type    = list(string)
+  default = [""]
+}
+
+variable "custom_role_list" {
   type    = list(string)
   default = [""]
 }

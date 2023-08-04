@@ -6,7 +6,6 @@ resource "azurerm_role_assignment" "assignment" {
   for_each = local.role_mappings
 
   scope              = local.scope_subscription
-  role_definition_id = each.value.custom_role_definition_id
-  #principal_id       = each.value.principal_id
-  principal_id = data.azuread_group.groups[each.value.group_key].object_id
+  role_definition_id = data.azurerm_role_definition.custom_role[each.value.custom_role_definition_name].id
+  principal_id       = data.azuread_group.groups[each.value.group_key].object_id
 }
