@@ -7,5 +7,6 @@ resource "azurerm_role_assignment" "assignment" {
 
   scope              = local.scope_subscription
   role_definition_id = each.value.custom_role_definition_id
-  principal_id       = each.value.principal_id
+  #principal_id       = each.value.principal_id
+  principal_id = data.azuread_group.groups[each.value.group_key].object_id
 }

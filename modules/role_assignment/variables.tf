@@ -21,3 +21,8 @@ variable "aad_groups" {
 variable "scope_subscription" {
   type = string
 }
+
+variable "aad_group_list" {
+  type    = list(string)
+  default = [""]
+}

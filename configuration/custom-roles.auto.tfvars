@@ -33,6 +33,14 @@ custom_role_definitions = {
       data_actions = [
         "Microsoft.KeyVault/vaults/*"
       ]
+      not_actions = [
+        "Microsoft.Authorization/*/Delete",
+        "Microsoft.Authorization/*/Write",
+        "Microsoft.Authorization/elevateAccess/Action",
+        "Microsoft.Blueprint/blueprintAssignments/write",
+        "Microsoft.Blueprint/blueprintAssignments/delete",
+        "Microsoft.Compute/galleries/share/action"
+      ]
     }
 
     assignable_scopes = [

@@ -25,6 +25,7 @@ locals {
         for id in each_mapping.custom_role_assignments : {
           custom_role_definition_id = id
           principal_id              = each_mapping.role_id
+          group_key                 = each_mapping.display_name
         }
       ]
     ])) : role_assignments.custom_role_definition_id => role_assignments

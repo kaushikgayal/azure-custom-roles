@@ -11,7 +11,7 @@ aad_groups_definitions = {
   }
   # PROD Admin
   prodadmin = {
-    display_name = "Prod-Admins"
+    display_name = "Prod-Admin"
     role_id      = "ce286f41-0901-496a-8e6c-f64bc155bf01"
     custom_role_assignments = [
       "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83/providers/Microsoft.Authorization/roleDefinitions/21b48f7f-8620-81a6-ab9d-ac8fb47a220a", #"custom-role-2",
