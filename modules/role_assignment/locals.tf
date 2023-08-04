@@ -1,5 +1,5 @@
 locals {
-  scope_mg = "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83"
+  scope_subscription = var.scope_subscription
   aad_groups_definitions = {
     for key, aad_groups in var.aad_groups_definitions : key => merge(var.aad_groups, aad_groups)
   }

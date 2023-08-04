@@ -1,3 +1,4 @@
+scope_subscription = "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83"
 
 aad_groups_definitions = {
   # Non PROD Admin

@@ -63,3 +63,7 @@ variable "aad_groups" {
     custom_role_assignments = []
   }
 }
+
+variable "scope_subscription" {
+  type = string
+}
