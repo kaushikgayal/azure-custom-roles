@@ -1,0 +1,12 @@
+
+.env
+
+.terraform/modules/
+
+tfplan
+
+*.tfstate
+
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.67.0/linux_amd64/
+
+.terraform/providers/registry.terraform.io/hashicorp/azuread/2.41.0/linux_amd64/

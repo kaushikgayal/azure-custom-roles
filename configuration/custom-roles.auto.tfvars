@@ -1,6 +1,7 @@
+
 custom_role_definitions = {
 
-  #Custom role #2
+  #Custom role #1
   custom-role-1 = {
     name        = "custom-role-1"
     description = "Provide addition permissions on top of built-in Contributor role to manage landing zones deployment"
@@ -29,10 +30,39 @@ custom_role_definitions = {
       actions = [
         "Microsoft.Authorization/roleAssignments/read",
       ]
+      data_actions = [
+        "Microsoft.KeyVault/vaults/*"
+      ]
     }
 
     assignable_scopes = [
       "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83" #it-azdo-private-agents
     ]
   }
+
+
+  #Custom role #3
+
+  custom-role-3 = {
+    name  = "custom-role-3"
+    scope = "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83"
+    permissions = {
+      actions = [
+        "Microsoft.Authorization/roleAssignments/read",
+      ]
+      not_actions = [
+        "Microsoft.Authorization/*/Delete",
+        "Microsoft.Authorization/*/Write",
+        "Microsoft.Authorization/elevateAccess/Action",
+        "Microsoft.Blueprint/blueprintAssignments/write",
+        "Microsoft.Blueprint/blueprintAssignments/delete",
+        "Microsoft.Compute/galleries/share/action"
+      ]
+    }
+
+    assignable_scopes = [
+      "/subscriptions/fcd22bc4-a57d-4409-882d-54bb2dce4e83" #it-azdo-private-agents
+    ]
+  }
+
 }

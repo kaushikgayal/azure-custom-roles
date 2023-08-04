@@ -16,12 +16,3 @@ resource "azurerm_role_definition" "custom_role" {
   assignable_scopes = each.value.assignable_scopes
 
 }
-
-
-/* resource "azurerm_role_assignment" "assignment" {
-  for_each = local.role_assignments
-
-  scope              = each.value.scope
-  role_definition_id = azurerm_role_definition.custom_role[each.value.role_key].id
-  principal_id       = each.value.aad_group_object_id
-} */
