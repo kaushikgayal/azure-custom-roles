@@ -1,32 +1,14 @@
 locals {
-  scope_subscription = var.scope_subscription
-  aad_groups_definitions = {
-    for key, aad_groups in var.aad_groups_definitions : key => merge(var.aad_groups, aad_groups)
-  }
-
-  role_assignments = {
-    for aad_groups in
-    flatten(
-      [
-        for key, role in local.aad_groups_definitions : {
-          display_name            = role.display_name
-          custom_role_assignments = role.custom_role_assignments
-          assignment_key          = key
+  mapping = flatten([
+    for i, role_mapping in var.role_mappings : [
+      for j, scope in role_mapping.scopes : [
+        for k, role in role_mapping.roles : {
+          scope                = scope
+          role_definition_name = role
+          principal_name       = role_mapping.group_name
+          role_type            = can(regex("^custom.*$", role)) ? "custom" : "built_in"
         }
       ]
-    ) : aad_groups.assignment_key => aad_groups
-  }
-
-  role_mappings = {
-    for role_assignments in
-    distinct(flatten([
-      for each_mapping in local.role_assignments : [
-        for id in each_mapping.custom_role_assignments : {
-          custom_role_definition_name = id
-          group_key                   = each_mapping.display_name
-        }
-      ]
-    ])) : role_assignments.custom_role_definition_name => role_assignments
-  }
-
+    ]
+  ])
 }

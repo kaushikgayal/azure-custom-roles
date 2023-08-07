@@ -1,11 +1,9 @@
 
-# For built in roles provide role definition name
-# example: role_definition_name = "Reader"
+resource "azurerm_role_assignment" "role_assignment" {
+  for_each = { for key, item in local.mapping : key => item }
 
-resource "azurerm_role_assignment" "assignment" {
-  for_each = local.role_mappings
-
-  scope              = local.scope_subscription
-  role_definition_id = data.azurerm_role_definition.custom_role[each.value.custom_role_definition_name].id
-  principal_id       = data.azuread_group.groups[each.value.group_key].object_id
+  scope                = each.value.scope
+  role_definition_name = each.value.role_type == "built_in" ? each.value.role_definition_name : null
+  role_definition_id   = each.value.role_type == "custom" ? var.custom_role[each.value.role_definition_name].role_definition_resource_id : null
+  principal_id         = data.azuread_group.groups[each.value.principal_name].id
 }

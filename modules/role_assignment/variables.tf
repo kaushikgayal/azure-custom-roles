@@ -1,23 +1,21 @@
 
-variable "aad_groups_definitions" {
-  description = "Map of aad_groups_definitions object as defined in the aad_groups"
+variable "role_mappings" {
+  description = "Map of role_mapping object as defined in the role_mappings"
 }
 
-variable "aad_groups" {
-  description = "AAD groups mapping to be used for custom role assignments"
+variable "role_mapping" {
+  description = "AAD groups mapping to be used for custom role assignments and built in roles assignments"
   type = object({
-    display_name            = string
-    custom_role_assignments = list(string)
+    group_name = string
+    roles      = list(string)
+    scopes     = list(string)
   })
 
   default = {
-    display_name            = ""
-    custom_role_assignments = []
+    group_name = ""
+    roles      = []
+    scopes     = []
   }
-}
-
-variable "scope_subscription" {
-  type = string
 }
 
 variable "aad_group_list" {
@@ -25,7 +23,6 @@ variable "aad_group_list" {
   default = [""]
 }
 
-variable "custom_role_list" {
-  type    = list(string)
-  default = [""]
+variable "custom_role" {
+  description = "Output from custom role creation"
 }

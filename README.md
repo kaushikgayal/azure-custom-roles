@@ -29,3 +29,13 @@ Microsoft.Authorization/roleAssignments/delete
 
 # Limitations
 You can have up to 4000 role assignments in each subscription. This limit includes role assignments at the subscription, resource group, and resource scopes. You can have up to 500 role assignments in each management group.
+
+# How to run this project in local
+1. Create an .env file in root folder providing below values:
+    - ARM_CLIENT_ID
+    - ARM_CLIENT_SECRET
+    - ARM_SUBSCRIPTION_ID
+    - ARM_TENANT_ID
+2. Change the values (if you wish) of inputs in cofiguration folder.
+3. Execute `make plan` to get the plan
+4. Execute `make apply` to apply the plan after review

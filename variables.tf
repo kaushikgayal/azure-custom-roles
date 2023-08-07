@@ -4,38 +4,25 @@ variable "custom_role_definitions" {
 
 variable "custom_role_definition" {
   type = object({
-    name              = string
-    description       = string
-    scope             = string
-    assignable_scopes = list(string)
-    permissions = object({
-      actions          = list(string)
-      not_actions      = list(string)
-      data_actions     = list(string)
-      not_data_actions = list(string)
-    })
+    name                         = string
+    description                  = string
+    scope                        = string
+    assignable_scopes            = list(string)
+    permissions_actions          = list(string)
+    permissions_not_actions      = list(string)
+    permissions_data_actions     = list(string)
+    permissions_not_data_actions = list(string)
   })
 
   default = {
-    name              = ""
-    description       = ""
-    scope             = ""
-    assignable_scopes = []
-    permissions = {
-      actions          = []
-      not_actions      = ["*"]
-      data_actions     = []
-      not_data_actions = []
-    }
-  }
-}
-
-variable "built-in-role_templates" {
-  description = "Built in role predefined templates to use"
-  type        = map(string)
-  default = {
-    "Contributor"             = "./templates/builtin-role/contributor.json"
-    "Key Vault Administrator" = "./templates/builtin-role/key-vault-administrator.json"
+    name                         = ""
+    description                  = ""
+    scope                        = ""
+    assignable_scopes            = []
+    permissions_actions          = []
+    permissions_not_actions      = ["*"]
+    permissions_data_actions     = []
+    permissions_not_data_actions = []
   }
 }
 
@@ -44,34 +31,26 @@ variable "tenant_id" {
   default = "6136803a-1c84-41a1-a46d-f3374b750208"
 }
 
-
-variable "aad_groups_definitions" {
-  description = "Map of aad_groups_definitions object as defined in the aad_groups"
-}
-
-variable "aad_groups" {
-  description = "AAD groups mapping to be used for custom role assignments"
-  type = object({
-    display_name            = string
-    custom_role_assignments = list(string)
-  })
-
-  default = {
-    display_name            = ""
-    custom_role_assignments = []
-  }
-}
-
-variable "scope_subscription" {
-  type = string
-}
-
 variable "aad_group_list" {
   type    = list(string)
   default = [""]
 }
 
-variable "custom_role_list" {
-  type    = list(string)
-  default = [""]
+variable "role_mappings" {
+  description = "Map of role_mapping object as defined in the role_mappings"
+}
+
+variable "role_mapping" {
+  description = "AAD groups mapping to be used for custom role assignments and built in roles assignments"
+  type = object({
+    group_name = string
+    roles      = list(string)
+    scopes     = list(string)
+  })
+
+  default = {
+    group_name = ""
+    roles      = []
+    scopes     = []
+  }
 }

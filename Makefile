@@ -33,7 +33,7 @@ _init: _login
 plan:
 	@docker compose run --rm azure-shell make _plan
 _plan: _init
-	terraform plan -var-file="configuration/custom-roles.auto.tfvars" -var-file="configuration/custom-role-list.tfvars" -var-file="configuration/custom-role-assignments.auto.tfvars" -out=tfplan
+	terraform plan -var-file="configuration/custom-roles.auto.tfvars" -var-file="configuration/azuread-group-list.tfvars" -var-file="configuration/role-mappings.auto.tfvars" -out=tfplan
 
 tf-scan:
 	@docker-compose run --rm azure-shell make _tf-scan
@@ -46,7 +46,7 @@ _tf-scan:
 apply:
 	@docker compose run --rm azure-shell make _apply
 _apply: _init
-	terraform apply -var-file="configuration/custom-roles.auto.tfvars" -var-file="configuration/custom-role-list.tfvars" -var-file="configuration/custom-role-assignments.auto.tfvars" -auto-approve
+	terraform apply -var-file="configuration/custom-roles.auto.tfvars" -var-file="configuration/azuread-group-list.tfvars" -var-file="configuration/role-mappings.auto.tfvars" -auto-approve
 
 destroy:
 	@docker compose run --rm azure-shell make _destroy

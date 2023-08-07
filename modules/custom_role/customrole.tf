@@ -1,18 +1,16 @@
-
 resource "azurerm_role_definition" "custom_role" {
-  for_each = local.role_definitions
+  for_each = { for key, item in var.custom_role_definitions : item.name => item }
 
-  name = each.value.role_key
-
-  description = each.value.description
+  name        = each.value.name
   scope       = each.value.scope
+  description = each.value.description
+
   permissions {
-    actions          = lookup(each.value.permissions, "actions", [])
-    not_actions      = lookup(each.value.permissions, "not_actions", [])
-    data_actions     = lookup(each.value.permissions, "data_actions", [])
-    not_data_actions = lookup(each.value.permissions, "not_data_actions", [])
+    actions          = tolist("${[for item in each.value.permissions_actions : item]}")
+    not_actions      = tolist("${[for item in each.value.permissions_not_actions : item]}")
+    data_actions     = tolist("${[for item in each.value.permissions_data_actions : item]}")
+    not_data_actions = tolist("${[for item in each.value.permissions_not_data_actions : item]}")
   }
 
-  assignable_scopes = each.value.assignable_scopes
-
+  assignable_scopes = tolist("${[for item in each.value.assignable_scopes : item]}")
 }
